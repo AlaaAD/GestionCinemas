@@ -19,7 +19,7 @@ public class Ticket implements Serializable {
     private Integer codePayement;
     private boolean reservee;
     @ManyToOne
-    private Projection projection;
+    private ProjectionFilm projection;
     @ManyToOne
     private Place place;
 

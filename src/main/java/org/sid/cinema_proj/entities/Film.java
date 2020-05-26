@@ -23,7 +23,7 @@ public class Film implements Serializable {
     private Categorie categorie;
    @OneToMany(mappedBy = "film")
    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-   private Collection<Projection> projections;
+   private Collection<ProjectionFilm> projections;
 
 
 }

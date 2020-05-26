@@ -17,7 +17,7 @@ public class Seance implements Serializable {
     private Date heureDebut;
     @OneToMany(mappedBy = "seance")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Collection<Projection> projections;
+    private Collection<ProjectionFilm> projections;
 
 
 

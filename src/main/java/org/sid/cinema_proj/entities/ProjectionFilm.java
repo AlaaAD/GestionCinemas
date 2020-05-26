@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor @ToString
-public class Projection implements Serializable {
+public class ProjectionFilm implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date dateProjection;
