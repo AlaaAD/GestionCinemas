@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="index"
+>
+<head>
+    <meta charset="utf-8">
+    <title>ADD FILM</title>
+</head>
+<body>
+<div class="container mt-5" layout:fragment="content">
+    <a class="btn btn-primary mt-5" th:href="@{listFilms}">Return to FILM Page</a>
+    <div class="card">
+        <div class="card-header">Remplissez le formulaire suivant pour ajouter</div>
+        <div class="card-body">
+
+            <form th:action="@{saveFilm}"
+                  method="post" th:object="${film}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="control-label">Titre:</label>
+                    <input type="text" name="titre" class="form-control" th:value="${film.titre}">
+                    <span th:errors="${film.titre}" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Durée:</label>
+                    <input type="number" name="duree" class="form-control" th:value="${film.duree}">
+                    <span th:errors="${film.duree}"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Réalisateur:</label>
+                    <input type="text" name="realisateur" class="form-control" th:value="${film.realisateur}">
+                    <span th:errors="${film.realisateur}"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Description:</label>
+                    <input type="text" name="description" class="form-control" th:value="${film.description}">
+                    <span th:errors="${film.description}"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">photo:</label>
+                    <input type="file" name="image" class="form-control">
+                    <span th:errors="${film.photo}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Date de Sortie:</label>
+                    <input type="date"  th:field="${film.dateSortie}" class="form-control" >
+                    <span th:errors="${film.dateSortie}"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Categories:</label>
+                    <select id="categorie" name="categorie" class="form-control">
+                        <option th:each="categorie:${categories}"
+                                th:value="${categorie.id}"
+                                th:text="${categorie.name}"
+                        ></option>
+
+                    </select>
+
+                </div>
+                <button class="btn btn-success" type="submit">Save</button>
+
+
+            </form>
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>

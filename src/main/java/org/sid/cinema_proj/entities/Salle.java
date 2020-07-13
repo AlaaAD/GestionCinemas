@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -12,6 +15,8 @@ import java.util.Collection;
 public class Salle implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
+    @Size(min=4, max = 15)
     private String name;
     private int nombrePlaces;
     @ManyToOne

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="index"
+>
+<head>
+    <meta charset="utf-8">
+    <title>Tickets</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <h2>/listTickets</h2>
+    <p>Page Tickets </p>
+    <form th:action="@{listTickets}" method="get">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="motCle" placeholder="Entrer un nom de client " th:value="${motCle}">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th>ID</th>
+            <th>NOM CLIENT</th>
+            <th>PRIX</th>
+            <th>RESERVEE</th>
+            <th>PLACE</th>
+            <th>SALLE</th>
+            <th>CINEMA</th>
+            <th>VILLE</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p:${pageTickets}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.nomClient}"></td>
+            <td th:text="${p.prix}"></td>
+            <td th:text="${p.reservee}"></td>
+            <td th:text="${p.place.numero}"></td>
+            <td th:text="${p.place.salle.name}"></td>
+            <td th:text="${p.place.salle.cinema.name}"></td>
+            <td th:text="${p.place.salle.cinema.ville.name}"></td>
+
+
+        </tr>
+        </tbody>
+    </table>
+    <ul class="nav nav-pills">
+        <li th:class="${status.index==currentPage}? 'page-item active':'page-item' " th:each="page,status:${pages}">
+            <a  class="page-link" th:href="@{listTickets(page=${status.index},size=${size},motCle=${motCle})}"
+                th:text="${status.index}">
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+
+</tbody>
+</table>
+</div>
+</body>
+</html>

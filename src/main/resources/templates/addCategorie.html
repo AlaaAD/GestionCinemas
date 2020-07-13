@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="index"
+>
+<head>
+    <meta charset="utf-8">
+    <title>ADD CATEGORIE</title>
+</head>
+<body>
+<div class="container mt-5" layout:fragment="content">
+    <a class="btn btn-primary mt-5" th:href="@{listCategories}">Return to CATEGORIE Page</a>
+   <div class="card">
+       <div class="card-header">Remplissez le formulaire suivant pour ajouter</div>
+       <div class="card-body">
+
+           <form th:action="@{saveCategorie}" method="post">
+               <div class="form-group">
+                   <label class="control-label">Name:</label>
+                   <input type="text" name="name" class="form-control" th:value="${categorie.name}">
+                   <span th:errors="${categorie.name}" class="text-danger"></span>
+               </div>
+
+               <button class="btn btn-success" type="submit">Save</button>
+
+
+           </form>
+       </div>
+
+   </div>
+
+
+</div>
+
+</body>
+</html>

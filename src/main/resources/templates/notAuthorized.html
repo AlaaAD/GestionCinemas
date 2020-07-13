@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorator="index"
+
+
+>
+<head>
+    <meta charset="utf-8">
+    <title>Page notAuthorized</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <div class="col-md-6 offset-md-3">
+        <h5 class="text-danger">Vous n'êtes pas autorisé </h5>
+        <a class="btn btn-primary mt-5" th:href="@{index}">Return to HOME Page</a>
+    </div>
+
+
+
+
+</div>
+</body>
+</html>

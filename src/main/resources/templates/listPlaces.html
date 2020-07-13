@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="index"
+>
+<head>
+    <meta charset="utf-8">
+    <title>Places</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <h2>/listPlaces</h2>
+    <p>Page Places </p>
+    <form th:action="@{listPlaces}" method="get">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="motCle" placeholder="Entrer une salle " th:value="${motCle}">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th>ID</th>
+            <th>Numéro</th>
+            <th>Salle</th>
+            <th>Cinema</th>
+            <th>Ville</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p:${pagePlaces}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.numero}"></td>
+            <td th:text="${p.salle.name}"></td>
+            <td th:text="${p.salle.cinema.name}"></td>
+            <td th:text="${p.salle.cinema.ville.name}"></td>
+
+
+        </tr>
+        </tbody>
+    </table>
+    <ul class="nav nav-pills">
+        <li th:class="${status.index==currentPage}? 'page-item active':'page-item' " th:each="page,status:${pages}">
+            <a  class="page-link" th:href="@{listPlaces(page=${status.index},size=${size},motCle=${motCle})}"
+                th:text="${status.index}">
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+
+</tbody>
+</table>
+</div>
+</body>
+</html>

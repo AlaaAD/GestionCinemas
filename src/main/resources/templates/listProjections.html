@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorator="index"
+>
+<head>
+    <meta charset="utf-8">
+    <title>Projections</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <h2>/listProjections</h2>
+    <p>Page Projections des films </p>
+    <form th:action="@{listProjections}" method="get">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="motCle" placeholder="Entrer un titre de film" th:value="${motCle}">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Search</button>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success" th:href="@{addProjection}">Add</a>
+            </div>
+        </div>
+    </form>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th>ID</th>
+            <th>Ville</th>
+            <th>Cinéma</th>
+            <th>Salle</th>
+            <th>Nombre de places</th>
+            <th>Film</th>
+            <th>Seance</th>
+            <th>Prix</th>
+            <th>Action</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p:${pageProjections}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.salle.cinema.ville.name}"></td>
+            <td th:text="${p.salle.cinema.name}"></td>
+            <td th:text="${p.salle.name}"></td>
+            <td th:text="${p.salle.nombrePlaces}"></td>
+            <td th:text="${p.film.titre}"></td>
+            <td th:text="${p.seance.heureDebut}"></td>
+            <td th:text="${p.prix}"></td>
+            <td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger" onclick="return confirm('Etes vous sûre de vouloir supprimer ?')" th:href="@{deleteProjection/{id}(id=${p.id},page=${currentPage},size=${size},motCle=${motCle})}">Delete</a></td>
+            <td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-warning" th:href="@{editProjection/{id}(id=${p.id})}">Update</a></td>
+            <td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary" th:href="@{generateTickets/{id}(id=${p.id})}">Générer les Tickets</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+    <ul class="nav nav-pills">
+        <li th:class="${status.index==currentPage}? 'page-item active':'page-item' " th:each="page,status:${pages}">
+            <a  class="page-link" th:href="@{listProjections(page=${status.index},size=${size},motCle=${motCle})}"
+                th:text="${status.index}">
+            </a>
+        </li>
+
+    </ul>
+</div>
+
+
+</tbody>
+</table>
+</div>
+</body>
+</html>

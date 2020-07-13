@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -100,7 +104,6 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
                     Film film=films.get(index);
                         seanceRepository.findAll().forEach(seance -> {
                             ProjectionFilm projection = new ProjectionFilm();
-                            projection.setDateProjection(new Date());
                             projection.setFilm(film);
                             projection.setPrix(prices[new Random().nextInt(prices.length)]);
                             projection.setSalle(salle);
@@ -156,6 +159,8 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
         });
 
     }
+
+
 
     @Override
     public void initVilles() {

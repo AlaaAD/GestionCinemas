@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="index"
+>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="../static/main.js" th:src="@{/main.js}"></script>
+    <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+    <title>ADD Salle</title>
+</head>
+<body>
+<div class="container mt-5" layout:fragment="content">
+    <a class="btn btn-primary mt-5" th:href="@{listProjections}">Return to Salle Page</a>
+    <div class="card">
+        <div class="card-header">Remplissez le formulaire suivant pour ajouter</div>
+        <div class="card-body">
+
+            <form th:action="@{saveProjection}" method="post">
+                <div class="form-group">
+                    <label class="control-label">Prix:</label>
+                    <input type="number" name="prix" class="form-control" th:value="${projection.prix}">
+                    <span th:errors="${projection.prix}" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Ville:</label>
+                    <select id="comboBoxVille" name="ville" class="form-control">
+                        <option th:each="c:${villes}"
+                                th:value="${c.id}"
+                                th:text="${c.name}"
+                        ></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Cinema:</label>
+                    <select id="comboBoxCinema" name="cinema" class="form-control">
+
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label">Film:</label>
+                    <select id="film" name="film" class="form-control">
+                        <option th:each="c:${films}"
+                                th:value="${c.id}"
+                                th:text="${c.titre}"
+                        ></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Seances:</label>
+                    <select id="seance" name="seance" class="form-control">
+                        <option th:each="c:${seances}"
+                                th:value="${c.id}"
+                                th:text="${c.heureDebut}"
+                        ></option>
+                    </select>
+                </div>
+
+                <button class="btn btn-success" type="submit">Save</button>
+
+
+            </form>
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>
